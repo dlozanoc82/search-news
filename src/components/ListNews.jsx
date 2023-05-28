@@ -1,11 +1,14 @@
-import { Grid, Typography } from "@mui/material"
+import { Grid, Typography, Pagination, Stack } from "@mui/material"
 import useNews from "../hooks/useNews"
 import News from "./News";
 
 
 const ListNews = () => {
 
-    const { news } = useNews();
+    const { news, totalNews, handleChangePage, page } = useNews();
+
+    const totalPages = Math.ceil(totalNews / 20);
+
 
     return (
         <>
@@ -29,6 +32,24 @@ const ListNews = () => {
                     />
                 ))}
             </Grid>
+
+            <Stack 
+                spacing={2}
+                direction={'row'}
+                justifyContent={'center'}
+                alignItems={'center'}
+                sx={{
+                    marginY: 5
+                }}
+            >
+                <Pagination 
+                    count={totalPages} 
+                    color="primary" 
+                    onChange={handleChangePage}
+                    page={page}
+                />
+            </Stack>
+
 
         </>
     )
